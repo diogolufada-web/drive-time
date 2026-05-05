@@ -1,0 +1,23 @@
+## Pages (8)
+- Loginpage [`Scaffold_2p2o128g`]
+  - Navigates to: Registerpage
+- Homepage [`Scaffold_sdh2oe1e`] [initial]
+  - Navigates to: defenioespage, historicopage, relatoriospage
+  - Queries: motoristas, pausas, turnos, veiculos
+  - Params: pause (Boolean), start (String)
+- Registerpage [`Scaffold_deyyr2tx`]
+  - Navigates to: Homepage, Loginpage
+  - Queries: motoristas
+- historicopage [`Scaffold_40t1w1g2`]
+  - Navigates to: Homepage, defenioespage, relatoriospage
+- relatoriospage [`Scaffold_0ll82tr9`]
+  - Navigates to: Homepage, defenioespage, historicopage
+- defenioespage [`Scaffold_5b7z37fl`]
+  - Navigates to: Homepage, Loginpage, dadosmotorista, dadosveiculos, historicopage, relatoriospage
+- dadosmotorista [`Scaffold_fyob53rn`]
+  - Navigates to: Homepage
+  - Queries: motoristas
+- dadosveiculos [`Scaffold_hglyerin`]
+  - Navigates to: Homepage
+  - Queries: veiculos
+

@@ -1,0 +1,3 @@
+[mcp_servers.flutterflow_ai]
+command = "flutterflow"
+args = ["ai", "mcp", "--workspace=C:\\Users\\Diogo Terrivel\\drive-time"]
