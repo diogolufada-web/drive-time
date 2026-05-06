@@ -128,26 +128,17 @@ Options:
 }
 
 void buildStarterEditFlow(App app) {
-  final primaryButton = EditPatternTarget.singleExistingButton();
-
-  app.editPageState('StarterPage', (state) {
-    state.ensureField('ctaLabel', string.withDefault('Open Starter'));
-    state.ensureField('showCta', bool_.withDefault(true));
-  });
-
-  app.ensureButtonBindings(
-    page: 'StarterPage',
-    button: primaryButton,
-    text: State('ctaLabel'),
-    visibleWhen: State('showCta'),
-  );
-
-  // Relatórios: UI shell only. Replaces [relatoriospage.body[0]] so existing
-  // bottom navigation on the Scaffold stays intact.
+  // Relatorios visual structure only. Keeps existing bottom navigation by
+  // replacing only body[0], and updates only this page's app bar title.
   const goldAccent = 0xFFD4AF37;
   const pageBg = 0xFF0A0A0A;
 
   app.editPage('relatoriospage', (page) {
+    page.ensureReplaced(
+      page.findByType('AppBar'),
+      AppBar(title: 'Relatórios'),
+    );
+
     page.ensureReplaced(
       page.findByPath('relatoriospage.body[0]'),
       Container(
@@ -161,13 +152,6 @@ void buildStarterEditFlow(App app) {
           spacing: 16,
           padding: 16,
           children: [
-            Text(
-              'Relatórios',
-              style: Styles.headlineSmall,
-              color: goldAccent,
-              textAlign: TextAlign.center,
-              name: 'RelatoriosTitle',
-            ),
             Container(
               name: 'RelatoriosDateCard',
               width: double.infinity,
@@ -202,6 +186,17 @@ void buildStarterEditFlow(App app) {
                       ),
                       Expanded(
                         child: Button(
+                          'Aplicar',
+                          name: 'RelatoriosBtnApplyDate',
+                          width: double.infinity,
+                          color: goldAccent,
+                          textColor: pageBg,
+                          borderRadius: 12,
+                          onTap: Snackbar('Filtros — em breve'),
+                        ),
+                      ),
+                      Expanded(
+                        child: Button(
                           'Data fim',
                           name: 'RelatoriosBtnEndDate',
                           width: double.infinity,
@@ -230,19 +225,15 @@ void buildStarterEditFlow(App app) {
                 spacing: 10,
                 children: [
                   Text(
-                    'Horas trabalhadas: 00:00:00',
-                    style: Styles.bodyLarge,
-                    color: Colors.primaryText,
-                  ),
-                  Text(
-                    'Pausas: 00:00:00',
-                    style: Styles.bodyLarge,
-                    color: Colors.primaryText,
-                  ),
-                  Text(
-                    'Total líquido: 00:00:00',
+                    'Total Hoje',
                     style: Styles.titleSmall,
+                    color: Colors.primaryText,
+                  ),
+                  Text(
+                    '00:00:00',
+                    style: Styles.headlineMedium,
                     color: goldAccent,
+                    textAlign: TextAlign.center,
                   ),
                 ],
               ),
@@ -264,9 +255,49 @@ void buildStarterEditFlow(App app) {
                     style: Styles.titleSmall,
                     color: Colors.primaryText,
                   ),
+                  Container(
+                    padding: 12,
+                    color: 0xFFF8F8F8,
+                    borderRadius: 12,
+                    child: Row(
+                      mainAxisAlignment: MainAxis.spaceBetween,
+                      children: [
+                        Text(
+                          'Turno 01',
+                          style: Styles.bodyMedium,
+                          color: Colors.primaryText,
+                        ),
+                        Text(
+                          '00:00 - 00:00',
+                          style: Styles.bodySmall,
+                          color: Colors.secondaryText,
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    padding: 12,
+                    color: 0xFFF8F8F8,
+                    borderRadius: 12,
+                    child: Row(
+                      mainAxisAlignment: MainAxis.spaceBetween,
+                      children: [
+                        Text(
+                          'Turno 02',
+                          style: Styles.bodyMedium,
+                          color: Colors.primaryText,
+                        ),
+                        Text(
+                          '00:00 - 00:00',
+                          style: Styles.bodySmall,
+                          color: Colors.secondaryText,
+                        ),
+                      ],
+                    ),
+                  ),
                   Text(
-                    'Ainda sem dados para mostrar',
-                    style: Styles.bodyMedium,
+                    'Placeholder visual - sem dados reais ainda',
+                    style: Styles.bodySmall,
                     color: Colors.secondaryText,
                     textAlign: TextAlign.center,
                   ),
