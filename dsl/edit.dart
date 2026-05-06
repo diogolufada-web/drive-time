@@ -141,4 +141,152 @@ void buildStarterEditFlow(App app) {
     text: State('ctaLabel'),
     visibleWhen: State('showCta'),
   );
+
+  // Relatórios: UI shell only. Replaces [relatoriospage.body[0]] so existing
+  // bottom navigation on the Scaffold stays intact.
+  const goldAccent = 0xFFD4AF37;
+  const pageBg = 0xFF0A0A0A;
+
+  app.editPage('relatoriospage', (page) {
+    page.ensureReplaced(
+      page.findByPath('relatoriospage.body[0]'),
+      Container(
+        name: 'RelatoriosBodyRoot',
+        width: double.infinity,
+        color: pageBg,
+        child: Column(
+          name: 'RelatoriosScrollColumn',
+          scrollable: true,
+          crossAxis: CrossAxis.stretch,
+          spacing: 16,
+          padding: 16,
+          children: [
+            Text(
+              'Relatórios',
+              style: Styles.headlineSmall,
+              color: goldAccent,
+              textAlign: TextAlign.center,
+              name: 'RelatoriosTitle',
+            ),
+            Container(
+              name: 'RelatoriosDateCard',
+              width: double.infinity,
+              padding: 16,
+              color: Colors.primaryBackground,
+              borderRadius: 16,
+              borderColor: goldAccent,
+              borderWidth: 1.5,
+              child: Column(
+                crossAxis: CrossAxis.stretch,
+                spacing: 12,
+                children: [
+                  Text(
+                    'Selecionar período',
+                    style: Styles.titleSmall,
+                    color: Colors.primaryText,
+                  ),
+                  Row(
+                    spacing: 12,
+                    children: [
+                      Expanded(
+                        child: Button(
+                          'Data início',
+                          name: 'RelatoriosBtnStartDate',
+                          width: double.infinity,
+                          variant: ButtonVariant.outlined,
+                          color: goldAccent,
+                          textColor: goldAccent,
+                          borderRadius: 12,
+                          onTap: Snackbar('Calendário — em breve'),
+                        ),
+                      ),
+                      Expanded(
+                        child: Button(
+                          'Data fim',
+                          name: 'RelatoriosBtnEndDate',
+                          width: double.infinity,
+                          variant: ButtonVariant.outlined,
+                          color: goldAccent,
+                          textColor: goldAccent,
+                          borderRadius: 12,
+                          onTap: Snackbar('Calendário — em breve'),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              name: 'RelatoriosSummaryCard',
+              width: double.infinity,
+              padding: 16,
+              color: Colors.primaryBackground,
+              borderRadius: 16,
+              borderColor: goldAccent,
+              borderWidth: 1.5,
+              child: Column(
+                crossAxis: CrossAxis.stretch,
+                spacing: 10,
+                children: [
+                  Text(
+                    'Horas trabalhadas: 00:00:00',
+                    style: Styles.bodyLarge,
+                    color: Colors.primaryText,
+                  ),
+                  Text(
+                    'Pausas: 00:00:00',
+                    style: Styles.bodyLarge,
+                    color: Colors.primaryText,
+                  ),
+                  Text(
+                    'Total líquido: 00:00:00',
+                    style: Styles.titleSmall,
+                    color: goldAccent,
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              name: 'RelatoriosListPlaceholderCard',
+              width: double.infinity,
+              padding: 16,
+              color: Colors.primaryBackground,
+              borderRadius: 16,
+              borderColor: goldAccent,
+              borderWidth: 1,
+              child: Column(
+                crossAxis: CrossAxis.stretch,
+                spacing: 8,
+                children: [
+                  Text(
+                    'Turnos no período',
+                    style: Styles.titleSmall,
+                    color: Colors.primaryText,
+                  ),
+                  Text(
+                    'Ainda sem dados para mostrar',
+                    style: Styles.bodyMedium,
+                    color: Colors.secondaryText,
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
+            ),
+            Button(
+              'Exportar PDF',
+              name: 'RelatoriosBtnExportPdf',
+              width: double.infinity,
+              color: goldAccent,
+              textColor: pageBg,
+              borderRadius: 14,
+              padding: EdgeInsets.symmetric(vertical: 14),
+              icon: 'picture_as_pdf',
+              onTap: Snackbar('Exportação PDF — em breve'),
+            ),
+          ],
+        ),
+      ),
+    );
+  });
 }
